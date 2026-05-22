@@ -1,0 +1,14 @@
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.*
+*.tfstate
+*.tfstate.backup
+
+# Terraform working directory
+.terraform/
+
+# Python / temp files
+get-pip.py
+
+# OS files
+.DS_Store
