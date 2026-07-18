@@ -77,3 +77,23 @@ module "codepipeline" {
 
   buildspec_path = "globalmart-devops/app/buildspec.yml"
 }
+
+module "sns" {
+  source = "../../modules/sns"
+
+  name_prefix = var.name_prefix
+  common_tags = var.common_tags
+  alert_email = "adesanyaadedeji63@gmail.com"
+}
+
+module "cloudwatch" {
+  source = "../../modules/cloudwatch"
+
+  name_prefix             = var.name_prefix
+  common_tags             = var.common_tags
+  sns_topic_arn           = module.sns.topic_arn
+  alb_arn_suffix          = module.alb.alb_arn_suffix
+  target_group_arn_suffix = module.alb.target_group_arn_suffix
+  ecs_cluster_name        = module.ecs.cluster_name
+  ecs_service_name        = module.ecs.service_name
+}
