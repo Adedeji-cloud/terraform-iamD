@@ -196,6 +196,7 @@ resource "aws_iam_role_policy" "codepipeline" {
           "ecs:DescribeServices",
           "ecs:DescribeTaskDefinition",
           "ecs:DescribeTasks",
+          "ecs:DescribeClusters",
           "ecs:ListTasks",
           "ecs:RegisterTaskDefinition",
           "ecs:UpdateService"
