@@ -69,7 +69,7 @@ module "codepipeline" {
 
   ecs_cluster_name = module.ecs.cluster_name
   ecs_service_name = module.ecs.service_name
-  container_name   = "app"
+  container_name   = module.ecs.container_name
 
   ecs_task_execution_role_arn = module.iam.ecs_task_execution_role_arn
   ecs_task_role_arn           = module.iam.ecs_task_role_arn

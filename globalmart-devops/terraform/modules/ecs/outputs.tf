@@ -22,3 +22,8 @@ output "ecs_tasks_security_group_id" {
   description = "Security group ID for ECS tasks"
   value       = aws_security_group.ecs_tasks.id
 }
+
+output "container_name" {
+  description = "Name of the container in the ECS task definition"
+  value       = "${var.name_prefix}-app"
+}
