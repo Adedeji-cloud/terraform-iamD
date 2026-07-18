@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlobalMart — The world's marketplace, delivered</title>
+    <meta name="description"
+        content="GlobalMart sources specialty goods from 48 countries and clears customs so they land on your doorstep." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #12173A;
+            --panel: #1B2150;
+            --panel-2: #232A63;
+            --saffron: #F2A93B;
+            --teal: #2FA79C;
+            --paper: #F6F1E4;
+            --slate: #8791B8;
+            --line: rgba(246, 241, 228, 0.14);
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Bricolage Grotesque', 'Inter', sans-serif;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--saffron);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .wordmark {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wordmark .dot {
+            color: var(--saffron);
+        }
+
+        .nav {
+            display: flex;
+            gap: 28px;
+            font-size: 0.92rem;
+            color: var(--slate);
+        }
+
+        .nav a {
+            text-decoration: none;
+            transition: color .15s ease;
+        }
+
+        .nav a:hover {
+            color: var(--paper);
+        }
+
+        .track-link {
+            display: none;
+        }
+
+        @media (min-width:720px) {
+            .track-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.78rem;
+                color: var(--teal);
+                border: 1px solid rgba(47, 167, 156, 0.4);
+                padding: 6px 12px;
+                border-radius: 999px;
+            }
+        }
+
+        .hero {
+            padding: 64px 0 40px;
+        }
+
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            letter-spacing: 0.14em;
+            color: var(--saffron);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--saffron);
+            box-shadow: 0 0 0 4px rgba(242, 169, 59, 0.18);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.3rem, 5.4vw, 3.9rem);
+            font-weight: 700;
+            max-width: 14ch;
+        }
+
+        .hero h1 .accent {
+            color: var(--saffron);
+        }
+
+        .hero p.lede {
+            margin: 22px 0 30px;
+            max-width: 46ch;
+            color: var(--slate);
+            font-size: 1.05rem;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 56px;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.94rem;
+            padding: 13px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform .15s ease, background .15s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--saffron);
+            color: #1A1200;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            border-color: var(--line);
+            color: var(--paper);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        .board {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .board-head {
+            display: grid;
+            grid-template-columns: 64px 1fr 1.4fr 110px;
+            gap: 12px;
+            padding: 14px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--slate);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .board-row {
+            display: grid;
+            grid-template-columns: 64px 1fr 1.4fr 110px;
+            gap: 12px;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--line);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            perspective: 600px;
+        }
+
+        .board-row:last-child {
+            border-bottom: none;
+        }
+
+        .board-row .gate {
+            color: var(--saffron);
+            font-weight: 700;
+        }
+
+        .flip {
+            display: inline-block;
+            transform-style: preserve-3d;
+            transition: transform .5s cubic-bezier(.4, 0, .2, 1), opacity .5s ease;
+        }
+
+        .flip.flipping {
+            transform: rotateX(90deg);
+            opacity: 0;
+        }
+
+        .status {
+            justify-self: end;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            padding: 5px 10px;
+            border-radius: 999px;
+            text-align: center;
+        }
+
+        .status.ontime {
+            background: rgba(47, 167, 156, 0.16);
+            color: var(--teal);
+        }
+
+        .status.boarding {
+            background: rgba(242, 169, 59, 0.16);
+            color: var(--saffron);
+        }
+
+        .status.cleared {
+            background: rgba(246, 241, 228, 0.1);
+            color: var(--paper);
+        }
+
+        @media (max-width:640px) {
+            .board-head {
+                display: none;
+            }
+
+            .board-row {
+                grid-template-columns: 46px 1fr;
+                row-gap: 6px;
+            }
+
+            .board-row .origin-item {
+                grid-column: 2;
+            }
+
+            .board-row .status {
+                grid-column: 2;
+                justify-self: start;
+            }
+        }
+
+        .gates {
+            padding: 70px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-head {
+            margin-bottom: 38px;
+            max-width: 52ch;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            margin-top: 10px;
+        }
+
+        .gate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+        }
+
+        .gate-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 26px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform .18s ease, border-color .18s ease;
+        }
+
+        .gate-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--teal);
+        }
+
+        .gate-card .gate-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--slate);
+            letter-spacing: 0.08em;
+        }
+
+        .gate-card .icon {
+            font-size: 1.7rem;
+        }
+
+        .gate-card h3 {
+            font-size: 1.12rem;
+        }
+
+        .gate-card p {
+            color: var(--slate);
+            font-size: 0.9rem;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .gate-card .go {
+            font-size: 0.85rem;
+            color: var(--saffron);
+            font-weight: 600;
+        }
+
+        .lanes {
+            padding: 20px 0 70px;
+        }
+
+        .pass {
+            background: var(--paper);
+            color: var(--ink);
+            border-radius: var(--radius);
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stub {
+            flex: 1 1 220px;
+            padding: 30px 26px;
+            position: relative;
+        }
+
+        .stub+.stub {
+            border-left: 2px dashed rgba(18, 23, 58, 0.25);
+        }
+
+        .stub::before,
+        .stub+.stub::after {
+            content: none;
+        }
+
+        .stub .num {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            font-size: 2.1rem;
+            color: var(--ink);
+        }
+
+        .stub .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(18, 23, 58, 0.6);
+            margin-top: 6px;
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 50px 0 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stamp {
+            width: 92px;
+            height: 92px;
+            border: 2px solid var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transform: rotate(-8deg);
+            flex-shrink: 0;
+        }
+
+        .stamp span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            color: var(--teal);
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .foot-links {
+            display: flex;
+            gap: 26px;
+            flex-wrap: wrap;
+            font-size: 0.88rem;
+            color: var(--slate);
+        }
+
+        .foot-links a {
+            text-decoration: none;
+        }
+
+        .foot-links a:hover {
+            color: var(--paper);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--slate);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .flip,
+            .gate-card,
+            .btn {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar wrap" style="max-width:1140px;margin:0 auto;">
+        <div class="wordmark">GLOBAL<span class="dot">•</span>MART</div>
+        <nav class="nav">
+            <a href="#categories">Pantry</a>
+            <a href="#categories">Home &amp; Living</a>
+            <a href="#categories">Wellness</a>
+            <a href="#categories">Gifts</a>
+        </nav>
+        <a class="track-link mono" href="#">● Terminal status: open</a>
+    </header>
+
+    <main class="wrap">
+
+        <section class="hero">
+            <p class="eyebrow">Worldwide marketplace · Terminal 1</p>
+            <h1>Sourced everywhere.<br><span class="accent">Delivered anywhere.</span></h1>
+            <p class="lede">GlobalMart clears customs on 12,400+ specialty goods from 48 countries, so the world's
+                pantry, wardrobe and workshop can land on your doorstep in days, not months.</p>
+            <div class="cta-row">
+                <a class="btn btn-primary" href="#categories">Browse today's arrivals</a>
+                <a class="btn btn-ghost" href="#lanes">How shipping works</a>
+            </div>
+
+            <div class="board" aria-label="Live arrivals board">
+                <div class="board-head">
+                    <span>Gate</span><span>Origin</span><span>Item</span><span style="text-align:right;">Status</span>
+                </div>
+                <div id="board-body"></div>
+            </div>
+        </section>
+
+        <section class="gates" id="categories">
+            <div class="section-head">
+                <p class="eyebrow">Now boarding</p>
+                <h2>Four terminals, one marketplace</h2>
+            </div>
+            <div class="gate-grid">
+                <a class="gate-card" href="#">
+                    <span class="gate-id">GATE A1</span>
+                    <span class="icon">🫙</span>
+                    <h3>Pantry &amp; Spice</h3>
+                    <p>Single-estate spices, small-batch oils and preserves flown in whole, not pre-ground.</p>
+                    <span class="go">View gate →</span>
+                </a>
+                <a class="gate-card" href="#">
+                    <span class="gate-id">GATE B2</span>
+                    <span class="icon">🏺</span>
+                    <h3>Home &amp; Living</h3>
+                    <p>Handloom textiles, ceramics and woodwork from artisan cooperatives.</p>
+                    <span class="go">View gate →</span>
+                </a>
+                <a class="gate-card" href="#">
+                    <span class="gate-id">GATE C3</span>
+                    <span class="icon">🌿</span>
+                    <h3>Wellness</h3>
+                    <p>Herbal teas, adaptogens and skincare sourced at origin, lab-tested on arrival.</p>
+                    <span class="go">View gate →</span>
+                </a>
+                <a class="gate-card" href="#">
+                    <span class="gate-id">GATE D4</span>
+                    <span class="icon">🎁</span>
+                    <h3>Gifts &amp; Curiosities</h3>
+                    <p>Small-run finds for people who've already got everything obvious.</p>
+                    <span class="go">View gate →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="lanes" id="lanes">
+            <div class="pass">
+                <div class="stub">
+                    <div class="num">48</div>
+                    <div class="label">Origin countries</div>
+                </div>
+                <div class="stub">
+                    <div class="num">3–5 days</div>
+                    <div class="label">Customs-cleared shipping</div>
+                </div>
+                <div class="stub">
+                    <div class="num">12,400+</div>
+                    <div class="label">Items in catalog</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer wrap" style="max-width:1140px;margin:0 auto;">
+        <div class="stamp"><span>Cleared for<br>delivery</span></div>
+        <div class="foot-links">
+            <a href="#">Shipping &amp; customs</a>
+            <a href="#">Track an order</a>
+            <a href="#">Become a supplier</a>
+            <a href="/health">System status</a>
+        </div>
+        <p class="copyright">© 2026 GlobalMart. Goods declared, duties cleared, doorsteps reached.</p>
+    </footer>
+
+    <script>
+        const flights = [
+            { gate: "A1", flag: "🇱🇰", origin: "Sri Lanka", item: "Ceylon cinnamon bark", status: "On time", cls: "ontime" },
+            { gate: "B2", flag: "🇵🇪", origin: "Peru", item: "Alpaca wool throws", status: "Boarding", cls: "boarding" },
+            { gate: "A1", flag: "🇯🇵", origin: "Japan", item: "Yuzu marmalade", status: "Cleared", cls: "cleared" },
+            { gate: "C3", flag: "🇿🇦", origin: "South Africa", item: "Rooibos tea, loose leaf", status: "On time", cls: "ontime" },
+            { gate: "C3", flag: "🇳🇿", origin: "New Zealand", item: "Manuka honey UMF 15+", status: "Boarding", cls: "boarding" },
+            { gate: "D4", flag: "🇲🇦", origin: "Morocco", item: "Hand-etched brass trays", status: "Cleared", cls: "cleared" },
+            { gate: "A1", flag: "🇮🇳", origin: "India", item: "Single-estate Assam tea", status: "On time", cls: "ontime" },
+            { gate: "B2", flag: "🇵🇹", origin: "Portugal", item: "Cork travel goods", status: "Cleared", cls: "cleared" },
+        ];
+
+        const ROWS = 5;
+        const board = document.getElementById("board-body");
+        const rowEls = [];
+
+        for (let i = 0; i < ROWS; i++) {
+            const row = document.createElement("div");
+            row.className = "board-row";
+            row.innerHTML = `
+      <span class="gate flip">--</span>
+      <span class="flip origin-item">—</span>
+      <span class="flip">—</span>
+      <span class="status flip cleared">—</span>
+    `;
+            board.appendChild(row);
+            rowEls.push(row);
+        }
+
+        function render(row, data) {
+            const [gateEl, originEl, itemEl, statusEl] = row.querySelectorAll(".flip");
+            gateEl.textContent = data.gate;
+            originEl.textContent = `${data.flag} ${data.origin}`;
+            itemEl.textContent = data.item;
+            statusEl.textContent = data.status;
+            statusEl.className = `status flip ${data.cls}`;
+        }
+
+        rowEls.forEach((row, i) => render(row, flights[i % flights.length]));
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!reduceMotion) {
+            let cursor = ROWS;
+            setInterval(() => {
+                const rowIndex = cursor % ROWS;
+                const dataIndex = cursor % flights.length;
+                const row = rowEls[rowIndex];
+                const flipEls = row.querySelectorAll(".flip");
+
+                flipEls.forEach(el => el.classList.add("flipping"));
+                setTimeout(() => {
+                    render(row, flights[dataIndex]);
+                    flipEls.forEach(el => el.classList.remove("flipping"));
+                }, 260);
+
+                cursor++;
+            }, 2600);
+        }
+    </script>
+
+</body>
+
+</html>
