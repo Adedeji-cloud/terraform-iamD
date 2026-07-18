@@ -51,4 +51,5 @@ module "ecs" {
   task_cpu                = "256"
   task_memory             = "512"
   desired_count           = 1
+  image_tag               = "v1.0.0"
 }
