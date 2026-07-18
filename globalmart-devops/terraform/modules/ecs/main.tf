@@ -109,6 +109,10 @@ resource "aws_ecs_service" "app" {
     assign_public_ip = false
   }
 
+  lifecycle {
+    ignore_changes = [task_definition]
+  }
+
   load_balancer {
     target_group_arn = var.target_group_arn
     container_name   = "${var.name_prefix}-app"

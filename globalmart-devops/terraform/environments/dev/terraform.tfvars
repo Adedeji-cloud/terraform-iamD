@@ -27,4 +27,4 @@ common_tags = {
 }
 
 github_owner = "Adedeji-cloud"
-github_repo = "terraform-iamD"
+github_repo  = "terraform-iamD"
