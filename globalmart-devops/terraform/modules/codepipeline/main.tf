@@ -189,7 +189,7 @@ resource "aws_iam_role_policy" "codepipeline" {
         Action   = ["codebuild:BatchGetBuilds", "codebuild:StartBuild"]
         Resource = aws_codebuild_project.app.arn
       },
-      {
+     {
         Sid    = "ECSDeploy"
         Effect = "Allow"
         Action = [
@@ -199,7 +199,8 @@ resource "aws_iam_role_policy" "codepipeline" {
           "ecs:DescribeClusters",
           "ecs:ListTasks",
           "ecs:RegisterTaskDefinition",
-          "ecs:UpdateService"
+          "ecs:UpdateService",
+          "ecs:TagResource"
         ]
         Resource = "*"
       },
