@@ -213,8 +213,11 @@ resource "aws_iam_role_policy" "codepipeline" {
           var.ecs_task_role_arn
         ]
         Condition = {
-          StringEqualsIfExists = {
-            "iam:PassedToService" = "ecs-tasks.amazonaws.com"
+          StringEquals = {
+            "iam:PassedToService" = [
+              "ecs.amazonaws.com",
+              "ecs-tasks.amazonaws.com"
+            ]
           }
         }
       }
