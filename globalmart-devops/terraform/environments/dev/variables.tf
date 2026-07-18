@@ -20,3 +20,13 @@ variable "common_tags" {
   description = "Common tags applied to resources"
   type        = map(string)
 }
+
+variable "github_owner" {
+  description = "GitHub organization or username that owns the repo"
+  type        = string
+}
+
+variable "github_repo" {
+  description = "GitHub repository name"
+  type        = string
+}

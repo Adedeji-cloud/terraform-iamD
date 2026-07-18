@@ -25,3 +25,6 @@ common_tags = {
   Project     = "globmart"
   Environment = "dev"
 }
+
+github_owner = "Adedeji-cloud"
+github_repo = "terraform-iamD"

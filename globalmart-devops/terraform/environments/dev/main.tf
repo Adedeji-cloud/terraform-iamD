@@ -53,3 +53,26 @@ module "ecs" {
   desired_count           = 1
   image_tag               = "v1.1.1"
 }
+
+module "codepipeline" {
+  source = "../../modules/codepipeline"
+
+  name_prefix = var.name_prefix
+  common_tags = var.common_tags
+
+  github_owner  = var.github_owner
+  github_repo   = var.github_repo
+  github_branch = "main"
+
+  ecr_repository_url = module.ecr.repository_url
+  ecr_repository_arn = module.ecr.repository_arn
+
+  ecs_cluster_name = module.ecs.cluster_name
+  ecs_service_name = module.ecs.service_name
+  container_name   = "app"
+
+  ecs_task_execution_role_arn = module.iam.ecs_task_execution_role_arn
+  ecs_task_role_arn           = module.iam.ecs_task_role_arn
+
+  buildspec_path = "globalmart-devops/app/buildspec.yml"
+}
