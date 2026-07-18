@@ -22,3 +22,14 @@ module "iam" {
   name_prefix = var.name_prefix
   common_tags = var.common_tags
 }
+
+module "alb" {
+  source = "../../modules/alb"
+
+  name_prefix       = var.name_prefix
+  common_tags       = var.common_tags
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = module.vpc.public_subnet_ids
+  target_port       = 3000
+  health_check_path = "/"
+}

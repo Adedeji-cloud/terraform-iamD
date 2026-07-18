@@ -62,3 +62,20 @@ output "ecs_task_role_name" {
   description = "Name of the ECS task role"
   value       = module.iam.ecs_task_role_name
 }
+
+output "alb_dns_name" {
+  description = "DNS name of the ALB (use this to access the app)"
+  value       = module.alb.alb_dns_name
+}
+output "alb_arn" {
+  description = "ARN of the ALB"
+  value       = module.alb.alb_arn
+}
+output "alb_target_group_arn" {
+  description = "ARN of the ALB target group (used by ECS service)"
+  value       = module.alb.target_group_arn
+}
+output "alb_security_group_id" {
+  description = "Security group ID of the ALB"
+  value       = module.alb.alb_security_group_id
+}
