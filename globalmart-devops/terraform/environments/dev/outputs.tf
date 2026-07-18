@@ -49,3 +49,16 @@ output "ecr_repository_name" {
   description = "Name of the ECR repository"
   value       = module.ecr.repository_name
 }
+
+output "ecs_task_execution_role_arn" {
+  description = "ARN of the ECS task execution role"
+  value       = module.iam.ecs_task_execution_role_arn
+}
+output "ecs_task_role_arn" {
+  description = "ARN of the ECS task role"
+  value       = module.iam.ecs_task_role_arn
+}
+output "ecs_task_role_name" {
+  description = "Name of the ECS task role"
+  value       = module.iam.ecs_task_role_name
+}

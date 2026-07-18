@@ -15,3 +15,10 @@ module "ecr" {
   common_tags     = var.common_tags
   repository_name = "app"
 }
+
+module "iam" {
+  source = "../../modules/iam"
+
+  name_prefix = var.name_prefix
+  common_tags = var.common_tags
+}
