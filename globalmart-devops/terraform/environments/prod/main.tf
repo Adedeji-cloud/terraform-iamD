@@ -30,6 +30,7 @@ module "alb" {
   common_tags       = var.common_tags
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
+  certificate_arn   = "arn:aws:acm:eu-west-1:142280718160:certificate/a0a808b4-918d-4428-9814-a7781bddc41a"
   target_port       = 3000
   health_check_path = "/"
 }
