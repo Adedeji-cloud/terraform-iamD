@@ -12,14 +12,12 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $ECR_REPO_URL:$IMAGE_TAG globalmart-devops/app
-      - docker tag $ECR_REPO_URL:$IMAGE_TAG $ECR_REPO_URL:latest
-  post_build:
+        post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $ECR_REPO_URL:$IMAGE_TAG
-      - docker push $ECR_REPO_URL:latest
-      - echo Writing image definitions file...
+            - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $ECR_REPO_URL:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 
