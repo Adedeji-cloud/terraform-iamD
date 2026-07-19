@@ -1,4 +1,6 @@
 **/.terraform/
 **/terraform.tfstate
 **/terraform.tfstate.backup
-*.json
+encryption.json
+markers.json
+versions.json
